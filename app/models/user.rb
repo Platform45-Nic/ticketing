@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :admins, class_name: 'Admin'
-  has_many :admins, class_name: 'Normal'
+  has_many :normals, class_name: 'Normal'
 
   validates_presence_of :email
   validates_presence_of :first_name
