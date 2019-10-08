@@ -1,0 +1,2 @@
+class NormalsController < ApplicationController
+end
