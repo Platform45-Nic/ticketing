@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   namespace :admins do
     get 'show', to: 'show', as: 'profile'
   end
+  scope '/admins' do
+    resources :catagories, only: [:index, :show, :new, :create]
+  end
+
   namespace :normals do
     get 'show', to: 'show', as: 'profile'
   end

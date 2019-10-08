@@ -1,0 +1,16 @@
+h1 Category Index
+
+p
+  | List of All Categories:
+  - if @catagories.present?
+    - @catagories.each do |catagory|
+      br
+      | Name: 
+      = catagory.name
+      br
+  - else
+    br
+    | There are currently no categories to show
+br
+= link_to "Create Category", new_catagory_path
+br
