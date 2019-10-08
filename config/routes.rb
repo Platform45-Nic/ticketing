@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   scope '/admins' do
     resources :catagories, only: [:index, :show, :new, :create]
+    resources :events
   end
 
   namespace :normals do

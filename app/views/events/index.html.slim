@@ -1,0 +1,19 @@
+p
+  | List of All Events: 
+  - if @events.present?
+    - @events.each do |event|
+      li
+        = event.name
+        |   
+        = event.description
+        |   
+        = link_to "Edit", edit_book_path(event.id)
+        |  | 
+        = link_to "View", book_path(event.id)
+        br
+  - else
+    br
+    | There are currently no events to show
+br
+= link_to "Create Event", new_event_path
+br

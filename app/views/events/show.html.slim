@@ -1,0 +1,15 @@
+p
+  | Show Events: 
+  - @event.each do |event|
+    li
+      = event.name
+      |   
+      = event.description
+      |   
+      = link_to "Edit", edit_book_path(event.id)
+      |  | 
+      = link_to "View", book_path(event.id)
+      br
+br
+= link_to "Create Event", new_event_path
+br
