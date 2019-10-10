@@ -13,10 +13,10 @@ class EventsController < ApplicationController
   end
 
   def create
+    # binding.pry
     @event = Event.new(event_params)
     if @event.save
-      binding.pry
-      TicketCreator.new(ticket_params).create_event_tickets
+      # TicketCreator.new(ticket_params).create_event_tickets
       flash[:success] = "You have created a event"
       redirect_to @event
     else
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
     end
 
     def ticket_params
-      params.require(:event).permit(:number_of_tickets, :price)
+      params.require(:ticket_attributes).permit(:number_of_tickets, :price)
     end
 
 end

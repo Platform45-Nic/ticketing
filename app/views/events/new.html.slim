@@ -10,6 +10,9 @@ p
       = f.label :number_of_tickets, "Number of tickets:"
       br
       = f.number_field :number_of_tickets, autocomplete: "number_of_tickets"
+      = f.fields_for :tickets do |ticket_form|
+        = ticket_form.label :price, "Price: "
+        = ticket_form.number_field :price
     .field
       = f.label :date, "Date:"
       br
