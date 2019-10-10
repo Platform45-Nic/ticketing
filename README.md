@@ -8,21 +8,20 @@ Things you may want to cover:
 * Ruby version
 
 * System dependencies
-
+  - Run 'bundle install'
 * Configuration
-
+  - N/A
 * Database creation
-
+  - Run 'rails db:drop db:create db:migrate'
 * Database initialization
-
+  - N/A
 * How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
 
-* ...
-# ticketing
+# Ticketing
 
 * Create a user model that will be used for Authentication and Authorization
 * The user model needs to account for both `Normal` users and `Admin` users (Please use STI)
