@@ -2,11 +2,12 @@ h1 Category Index
 
 p
   | List of All Categories:
+  br
   - if @catagories.present?
     - @catagories.each do |catagory|
       br
       | Name: 
-      = catagory.name
+      = link_to "#{catagory.name}", catagory_path(catagory.id)
       br
   - else
     br

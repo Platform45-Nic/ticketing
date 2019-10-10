@@ -13,4 +13,9 @@ class User < ApplicationRecord
 
   scope :admin, -> { where(type: 'Admin')}
   scope :normal, -> { where(type: 'Normal')}
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
 end

@@ -21,10 +21,11 @@ p
     .field
       = f.label :description, "Description:"
       br
-      = f.text_field :description, autocomplete: "number_of_tickets"
+      = f.text_field :description, autocomplete: "description"
     .field
       = f.label :creator, "Creator:"
       br
+      = f.label :creator, "#{User.find(current_user.id).full_name}"
       = f.hidden_field :creator, :value => current_user.id
     .action_container
       br
