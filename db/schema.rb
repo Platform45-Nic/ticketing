@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191008154115) do
+ActiveRecord::Schema.define(version: 20191010120311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,26 @@ ActiveRecord::Schema.define(version: 20191008154115) do
     t.string "name"
     t.integer "number_of_tickets"
     t.date "date"
-    t.string "catagory"
     t.text "description"
     t.string "creator"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "catagory_id"
+    t.index ["catagory_id"], name: "index_events_on_catagory_id"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "number"
+    t.bigint "event_id"
+    t.boolean "sold_originally", default: false
+    t.boolean "sold_on_marketplace", default: false
+    t.boolean "on_resell", default: false
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "purchaser_id"
+    t.index ["event_id"], name: "index_tickets_on_event_id"
+    t.index ["purchaser_id"], name: "index_tickets_on_purchaser_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,4 +63,7 @@ ActiveRecord::Schema.define(version: 20191008154115) do
     t.index ["type"], name: "index_users_on_type"
   end
 
+  add_foreign_key "events", "catagories"
+  add_foreign_key "tickets", "events"
+  add_foreign_key "tickets", "users", column: "purchaser_id"
 end

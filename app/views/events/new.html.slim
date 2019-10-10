@@ -11,6 +11,10 @@ p
       br
       = f.number_field :number_of_tickets, autocomplete: "number_of_tickets"
     .field
+      = f.fields_for :tickets do |ticket_form|
+        = ticket_form.label :price, "Price: "
+        = ticket_form.number_field :price
+    .field
       = f.label :date, "Date:"
       br
       = f.date_field :date
@@ -21,10 +25,11 @@ p
     .field
       = f.label :description, "Description:"
       br
-      = f.text_field :description, autocomplete: "number_of_tickets"
+      = f.text_field :description, autocomplete: "description"
     .field
       = f.label :creator, "Creator:"
       br
+      = f.label :creator, "#{User.find(current_user.id).full_name}"
       = f.hidden_field :creator, :value => current_user.id
     .action_container
       br
