@@ -10,9 +10,10 @@ p
       = f.label :number_of_tickets, "Number of tickets:"
       br
       = f.number_field :number_of_tickets, autocomplete: "number_of_tickets"
-    .field
+      br
       = f.fields_for :tickets do |ticket_form|
         = ticket_form.label :price, "Price: "
+        br
         = ticket_form.number_field :price
     .field
       = f.label :date, "Date:"
@@ -21,7 +22,7 @@ p
     .field
       = f.label :catagory, "Name of Category:"
       br
-      = f.collection_select :catagory, Catagory.order(:name), :id, :name, include_blank: true
+      = f.collection_select :catagory, Catagory.all, :id, :name, prompt: true
     .field
       = f.label :description, "Description:"
       br
