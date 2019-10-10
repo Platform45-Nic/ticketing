@@ -1,5 +1,5 @@
 class AddPurchaserReferencesToTickets < ActiveRecord::Migration[5.1]
   def change
-    add_column :tickets, :purchaser, :integer, references: :users, foreign_key: true
+    add_reference :tickets, :purchaser, foreign_key: { to_table: :users}
   end
 end
