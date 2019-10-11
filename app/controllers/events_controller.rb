@@ -43,7 +43,7 @@ class EventsController < ApplicationController
   private
 
     def event_params
-      params.require(:event).except(:catagory).permit(:name, :number_of_tickets, :date, :description, :creator)
+      params.require(:event).permit(:name, :number_of_tickets, :date, :catagory_id, :description, :creator)
     end
 
     def ticket_params
