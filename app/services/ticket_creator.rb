@@ -8,8 +8,8 @@ class TicketCreator
   end
 
   def create_event_tickets
-    @ticket_array.each do 
-      Ticket.new(number: [@ticket_number + 1].to_s, event_id: @event_id, sold_originally: false, sold_on_marketplace: false, on_resell: false, price: @price, purchaser_id: '')
+    @ticket_array.each do |n|
+      Ticket.new(number: (@ticket_number = (@ticket_number + 1)).to_s, event_id: @event_id, sold_originally: false, sold_on_marketplace: false, on_resell: false, price: @price, purchaser_id: '').save
     end
   end
 

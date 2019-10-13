@@ -18,8 +18,8 @@ class EventsController < ApplicationController
     @ticket_params = ticket_params
     @event = Event.new(event_params)
     if @event.save
-      # TicketCreator.new(@ticket_params, @event).create_event_tickets
-      binding.pry
+      TicketCreator.new(@ticket_params, @event).create_event_tickets
+      # binding.pry
       flash[:success] = "You have created a event"
       redirect_to @event
     else
