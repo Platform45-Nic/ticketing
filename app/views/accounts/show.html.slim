@@ -1,0 +1,24 @@
+h1 Account for: 
+= @user.full_name
+br
+p
+  | List of All Transactions: 
+  - if @account_transactions.present?
+    - @account_transactions.each do |account_transaction|
+      li
+        | Amount: 
+        = account_transaction.amount.to_s
+        br
+        | Account: 
+        = account_transaction.account_id
+        br
+        | Account: 
+        = account_transaction.note
+        br
+        |   
+        / = link_to "View Transaction", edit_event_path(account_transaction.id)
+        / br
+  - else
+    br
+    | There are currently no events to show
+br
