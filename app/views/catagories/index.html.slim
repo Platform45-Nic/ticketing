@@ -6,7 +6,7 @@ p
   - if @catagories.present?
     - @catagories.each do |catagory|
       br
-      | Name: 
+      | Category Name: 
       = link_to "#{catagory.name}", catagory_path(catagory.id)
       br
   - else

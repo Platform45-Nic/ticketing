@@ -1,7 +1,15 @@
 - if user_signed_in? && current_user.type == "Admin"
     = link_to "Home", root_path
     br
-    = link_to "Profile Admin", admins_profile_path
+    = link_to "Profile: Admin", admins_profile_path
+    br
+    = link_to "All Categories", catagories_path
+    br
+    = link_to "New Category", new_catagory_path
+    br
+    = link_to "All Events", events_path
+    br
+    = link_to "New Event", new_event_path
     br
     = link_to "Logout", destroy_user_session_path, method: :delete
     br

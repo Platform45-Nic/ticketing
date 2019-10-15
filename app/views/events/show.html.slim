@@ -2,7 +2,7 @@ p
   | Show Event: 
   li
     | Event Name: 
-    = @event.name
+    = @event.name.capitalize
     br
   li
     | Number of tickets: 
@@ -18,19 +18,18 @@ p
     br
   li
     | Description: 
-    = @event.description
+    = @event.description.capitalize
     br
   li
     | Creator: 
-    = User.find(@event.creator).full_name
+    = User.find(@event.creator.to_i).full_name
+    br
+    br
+    | Event Admin Actions: 
     br
     |   
     = link_to "Edit", edit_event_path(@event.id)
     |  | 
     = link_to "Delete", event_path(@event.id), method: :delete
     br
-br
-= link_to "Create Event", new_event_path
-br
-= link_to "All Event's", events_path
 br

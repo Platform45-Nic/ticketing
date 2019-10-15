@@ -5,6 +5,30 @@ p
   br
   = @catagory.name
   br
+  p
+  | List of Events for this Category:
+  br
+  - if @catagory_events.present?
+    - @catagory_events.each do |catagory_event|
+      br
+      | Name: 
+      = link_to "#{catagory_event.name.capitalize}", event_path(catagory_event.id)
+      br
+      | Date: 
+      = catagory_event.date.to_s
+      br
+      | Tickets Availble: 
+      = catagory_event.number_of_tickets.to_s
+      br
+      | Description: 
+      = catagory_event.description
+      br
+      | Created by: 
+      = User.find(catagory_event.creator.to_i).full_name
+      br
+  - else
+    br
+    | There are currently no categories to show
 br
-= link_to "Continue", catagories_path
+= link_to "Create Category", new_catagory_path
 br
