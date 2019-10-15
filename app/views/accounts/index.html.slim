@@ -1,0 +1,15 @@
+p
+  | List of All Events: 
+  - if @events.present?
+    - @events.each do |event|
+      li
+        = event.name.capitalize
+        |   
+        = link_to "Edit", edit_event_path(event.id)
+        |  | 
+        = link_to "View", event_path(event.id)
+        br
+  - else
+    br
+    | There are currently no events to show
+br

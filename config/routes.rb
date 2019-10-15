@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   namespace :normals do
     get 'show', to: 'show', as: 'profile'
   end
+  scope '/normals' do
+    resources :accounts, only: [:index, :show]
+  end
 
   # devise_scope :user do
   #   get 'login', to: 'devise/sessions#new'
