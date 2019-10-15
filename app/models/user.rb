@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :price
+
   has_many :admins, class_name: 'Admin'
   has_many :normals, class_name: 'Normal'
 
@@ -15,7 +17,7 @@ class User < ApplicationRecord
   scope :normal, -> { where(type: 'Normal')}
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name.capitalize} #{last_name.capitalize}"
   end
 
 end

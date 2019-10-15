@@ -6,6 +6,7 @@ class CatagoriesController < ApplicationController
 
   def show
     @catagory = Catagory.find(params[:id])
+    @catagory_events = Event.where(catagory_id: @catagory.id.to_i)
   end
 
   def new
