@@ -2,10 +2,10 @@ h1 Profile
 
 p
   | Name: 
-  = @user.first_name
+  = @user.first_name.capitalize
   br
   | Surname: 
-  = @user.last_name
+  = @user.last_name.capitalize
   br
   | Email: 
   = @user.email
@@ -13,6 +13,7 @@ p
   | Type: 
   = @user.type
   br
-  | Current User: 
+  | Current User ID: 
   = current_user.id
   br
+br/
