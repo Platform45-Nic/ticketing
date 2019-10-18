@@ -1,14 +1,16 @@
 class NormalsController < ApplicationController
+  # include NormalsHelper
+  # skip_before_action :account_init, except: :show
 
   def index
   end
 
   def show
     @user = User.find(current_user.id)
-    if @account = Account.find(user_id: @user.id).blank?
+    if @account = Account.find_by(user_id: @user.id).blank?
       account_init
     else
-      @account = Account.find(user_id: @user.id)
+      @account = Account.find_by(user_id: @user.id)
       @account_transactions = AccountTransaction.where(account_id: @account.id)
     end
   end
@@ -17,8 +19,9 @@ class NormalsController < ApplicationController
   
   def account_init
     if current_user.present? && current_user.type == "Normal"
-      @account_new = Account.new(user_id: User.find(current_user.id).id, amount: 100).save
-      AccountTransaction.new(amount: 100, account_id: @account_new.id.to_i, note: "initialization").save
+      if Account.new(user_id: User.find(current_user.id).id, amount: 100).save
+        AccountTransaction.new(amount: 100, account_id: Account.find_by(user_id: User.find(current_user.id).id).id, note: "initialization").save
+      end
     end
   end
 

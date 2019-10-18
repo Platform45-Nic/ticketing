@@ -1,6 +1,6 @@
 p
   | List of All Events: 
-  - if @events.present?
+  - if @events.present? && current_user.type == "Admin"
     - @events.each do |event|
       li
         = event.name.capitalize
@@ -8,6 +8,13 @@ p
         = link_to "Edit", edit_event_path(event.id)
         |  | 
         = link_to "View", event_path(event.id)
+        br
+  - elsif @events.present? && current_user.type == "Normal"
+    - @events.each do |event|
+      li
+        = link_to "#{event.name.capitalize}", normals_event_path(event.id)
+        |  | Tickets Availble: 
+        = event.availble_ticket_count
         br
   - else
     br
