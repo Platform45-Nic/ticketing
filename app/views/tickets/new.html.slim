@@ -1,0 +1,37 @@
+h3
+  | Buy a ticket:
+p
+  = form_for(@ticket) do |f|
+    .field
+      = f.label :name, "Event Name:"
+      br
+      = f.text_field :name, autocomplete: "name", autofocus: true
+    .field
+      = f.label :number_of_tickets, "Number of tickets:"
+      br
+      = f.number_field :number_of_tickets, autocomplete: "number_of_tickets"
+      br
+      = f.fields_for :tickets do |ticket_form|
+        = ticket_form.label :price, "Price of ticket: "
+        br
+        = ticket_form.number_field :price
+    .field
+      = f.label :date, "Date:"
+      br
+      = f.date_field :date
+    .field
+      = f.label :catagory_id, "Name of Category:"
+      br
+      = f.collection_select :catagory_id, Catagory.all, :id, :name, prompt: true
+    .field
+      = f.label :description, "Description:"
+      br
+      = f.text_field :description, autocomplete: "description"
+    .field
+      = f.label :creator, "Creator:"
+      br
+      = f.label :creator, "#{User.find(current_user.id).full_name}"
+      = f.hidden_field :creator, :value => current_user.id
+    .action_container
+      br
+      = f.submit

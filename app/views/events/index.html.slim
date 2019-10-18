@@ -14,10 +14,7 @@ p
       li
         = link_to "#{event.name.capitalize}", normals_event_path(event.id)
         |  | Tickets Availble: 
-        - if event.availble_ticket_count.to_i > 0
-          = event.availble_ticket_count
-        - else
-          | Sold Out
+        = event.availble_ticket_count
         br
   - else
     br

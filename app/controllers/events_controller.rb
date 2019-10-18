@@ -49,8 +49,4 @@ class EventsController < ApplicationController
       params.require(:event).permit(:number_of_tickets, tickets_attributes: [:price])
     end
 
-    def ticket_count(event)
-      Ticket.where(event_id: event.id).count
-    end
-
 end
