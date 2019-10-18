@@ -10,11 +10,13 @@ Rails.application.routes.draw do
     resources :events
   end
 
-  namespace :normals do
-    get 'show', to: 'show', as: 'profile'
-  end
-  scope '/normals' do
+  scope '/user' do
+    get 'show', to: 'normals#show', as: 'normals_profile'
     resources :accounts, only: [:index, :show]
+    scope '/event' do
+      get 'index', to: 'events#index', as: 'normals_events'
+      get 'show/:id', to: 'events#show', as: 'normals_event'
+    end
   end
 
   # devise_scope :user do
