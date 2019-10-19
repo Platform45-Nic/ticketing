@@ -23,7 +23,9 @@ class TicketsController < ApplicationController
   end
 
   def edit
-    @ticket = Ticket.find(params[:id])
+    @event = Event.find(params[:id])
+    @user = User.find(current_user.id)
+    @available_tickets = @event.availble_ticket_count
   end
 
   def update
@@ -39,7 +41,7 @@ class TicketsController < ApplicationController
   private
 
     def ticket_params
-      params.require(:ticket).permit(:number, :event_id, :sold_originally, :sold_on_marketplace, :on_resell, :price, :purchaser_id)
+      params.permit(:ticket_no_for_purchase, :event_id, :purchaser_id)
     end
 
 end

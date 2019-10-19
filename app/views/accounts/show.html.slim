@@ -6,13 +6,15 @@ p
   - if @account_transactions.present?
     - @account_transactions.each do |account_transaction|
       li
-        | Amount: 
+        | Transaction Amount for: 
         = account_transaction.amount.to_s
         br
-        | Account: 
+      li
+        | Account No.: 
         = account_transaction.account_id
         br
-        | Account: 
+      li
+        | Reason: 
         = account_transaction.note
         br
         |   
