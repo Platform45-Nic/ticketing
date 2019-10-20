@@ -31,7 +31,7 @@ class TicketsController < ApplicationController
   def update
     @tickets_to_purchase = ticket_params
     # Check if there is enough for the transaction:
-    if Account.find_by(user_id: User.find(current_user.id).id).check_ticket_price_against_account?(ticket_price_total(@tickets_to_purchase, Ticket.first.where(event_id: @tickets_to_purchase[:event_id].to_i))) == true
+    if Account.find_by(user_id: User.find(current_user.id).id).check_ticket_price_against_account?(ticket_price_total(@tickets_to_purchase, Ticket.where(event_id: @tickets_to_purchase[:event_id].to_i).first)) == true
       # Check the ticket counter is not 0 before purchase:
       if @tickets_to_purchase[:ticket_no_for_purchase].to_i > 0
         @ticket_array = Ticket.all.where(event_id: @tickets_to_purchase[:event_id].to_i, sold_originally: false, purchaser_id: nil)

@@ -2,7 +2,7 @@ h3
   | Purchase Tickets for this Event: 
   br
 p
-  = form_tag ticket_purchased_patch_path, method: :patch do |f|
+  = form_tag show_path, method: :patch do |f|
     | Event Name: 
     = @event.name.capitalize
     br/
