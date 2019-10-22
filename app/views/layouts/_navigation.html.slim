@@ -7,16 +7,16 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.static-top
     #navbarResponsive.collapse.navbar-collapse
       ul.navbar-nav.ml-auto
         - if user_signed_in? && current_user.type == "Admin"
-          = render "links/admin_nav"
+          = render "layouts/links/admin_nav"
         - elsif user_signed_in? && current_user.type == "Normal"
-          = render "links/user_nav"
+          = render "layouts/links/user_nav"
         - else
-        li.nav-item.active
-          a.nav-link
-            = link_to "Login", new_user_session_path, class: 'nav-link'
-        li.nav-item
-          a.nav-link
-            = link_to "Sign Up", new_user_registration_path, class: 'nav-link'
-        li.nav-item
-          a.nav-link
-            = link_to "Home", root_path, class: 'nav-link'
+          li.nav-item.active
+            a.nav-link
+              = link_to "Login", new_user_session_path, class: 'nav-link'
+          li.nav-item
+            a.nav-link
+              = link_to "Sign Up", new_user_registration_path, class: 'nav-link'
+          li.nav-item
+            a.nav-link
+              = link_to "Home", root_path, class: 'nav-link'
