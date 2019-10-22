@@ -3,6 +3,7 @@ class Account < ApplicationRecord
   has_many :account_transactions
 
   validates_presence_of :user_id
+  validates_presence_of :amount
 
   def check_ticket_price_against_account?(ticket_price_total)
     if ticket_price_total <= self.amount
