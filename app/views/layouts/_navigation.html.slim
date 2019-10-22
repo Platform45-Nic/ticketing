@@ -1,0 +1,22 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.static-top
+  .container
+    a.navbar-brand
+      = link_to "Ticketing", root_path, class: 'navbar-brand'
+    button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"]
+      span.navbar-toggler-icon
+    #navbarResponsive.collapse.navbar-collapse
+      ul.navbar-nav.ml-auto
+        - if user_signed_in? && current_user.type == "Admin"
+          = render "links/admin_nav"
+        - elsif user_signed_in? && current_user.type == "Normal"
+          = render "links/user_nav"
+        - else
+        li.nav-item.active
+          a.nav-link
+            = link_to "Login", new_user_session_path, class: 'nav-link'
+        li.nav-item
+          a.nav-link
+            = link_to "Sign Up", new_user_registration_path, class: 'nav-link'
+        li.nav-item
+          a.nav-link
+            = link_to "Home", root_path, class: 'nav-link'
