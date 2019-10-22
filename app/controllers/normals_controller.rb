@@ -7,6 +7,7 @@ class NormalsController < ApplicationController
 
   def show
     @user = User.find(current_user.id)
+    @account = @user.account
     if @account = Account.find_by(user_id: @user.id).blank?
       account_init
     else

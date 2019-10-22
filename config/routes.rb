@@ -13,11 +13,16 @@ Rails.application.routes.draw do
   scope '/user' do
     get 'show', to: 'normals#show', as: 'normals_profile'
     resources :accounts, only: [:index, :show]
+    resources :events, only: [:show, :edit, :update]
     scope '/event' do
       get 'index', to: 'events#index', as: 'normals_events'
       get 'show/:id', to: 'events#show', as: 'normals_event'
-      get 'show/:id/new', to: 'tickets#new', as: 'event_ticket_purchase'
-      post 'show/ticket', to: 'tickets#create'
+      # Below routes are specific to purchasing tickets for a event:
+      # get 'show/:id/edit', to: 'tickets#edit', as: 'event_ticket_purchase'
+      resources :show, controller: 'tickets', only: [:edit, :update]
+      # patch 'show/:id', to: 'tickets#update', as: 'ticket_purchased_patch'
+      # put 'show/:id', to: 'tickets#update', as: 'ticket_purchased_put'
+      get 'show/:id/tickets', to: 'tickets#show', as: 'show_tickets'
     end
   end
 
