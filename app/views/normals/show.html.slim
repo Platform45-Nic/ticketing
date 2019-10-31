@@ -10,10 +10,10 @@ p
   | Email: 
   = @user.email
   br
-  | Type: 
+  | User Type: 
   = @user.type
   br
-  | Current User ID: 
-  = current_user.id
-  br
 br/
+| You can:
+br
+  = link_to "View Events ", normals_events_path

@@ -1,4 +1,4 @@
-p
+p.lead
   | List of All Events: 
   - if @events.present? && current_user.type == "Admin"
     - @events.each do |event|
@@ -15,8 +15,12 @@ p
         = link_to "#{event.name.capitalize}", normals_event_path(event.id)
         |  | Tickets Availble: 
         = event.availble_ticket_count
-        br
+        |  | 
+        = link_to "Purchase Tickets!", edit_show_path(event.id), method: :get
   - else
     br
     | There are currently no events to show
+br
+| You can: 
+= link_to "Create an Event!", new_event_path
 br

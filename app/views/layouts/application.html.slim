@@ -14,5 +14,7 @@ html[lang="en"]
       p.alert.alert-danger
         = alert
     = render "layouts/navigation"
-    = yield
-    
+    .container
+      .row
+        .col-lg-12.text-center-right
+          = yield

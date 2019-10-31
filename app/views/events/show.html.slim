@@ -1,4 +1,4 @@
-- if @event.present? && current_user.type == "Admin"
+- if current_user.type == "Admin" && @event.present?
   p
     | Show Event: 
     li
@@ -33,8 +33,10 @@
       |  | 
       = link_to "Delete", event_path(@event.id), method: :delete
       br
+      / | or 
+      / = link_to "Continue to Event's Index!", events_path
   br
-- elsif @event.present? && current_user.type == "Normal"
+- elsif current_user.type == "Normal" && @event.present?
   p
     | Show Event: 
     li

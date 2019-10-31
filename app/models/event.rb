@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :number_of_tickets
   validates_presence_of :date
+  validate :date_availability
   validates_presence_of :creator
   validates_presence_of :catagory_id
 
@@ -16,6 +17,14 @@ class Event < ApplicationRecord
       return @tickets
     else
       "Sold Out!"
+    end
+  end
+
+  private
+
+  def date_availability
+    if date.present? && date < Date.today
+      errors.add(:date, "can't be in the past")
     end
   end
 

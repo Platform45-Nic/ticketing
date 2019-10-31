@@ -17,7 +17,7 @@ class CatagoriesController < ApplicationController
     @catagory = Catagory.new(catagory_params)
     if @catagory.save
       flash[:success] = "You have Created a new Catagory"
-      redirect_to @catagory
+      redirect_to @catagory, notice: "You have Created a new Catagory"
     else
       render 'new'
     end

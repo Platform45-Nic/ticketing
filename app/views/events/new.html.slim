@@ -1,6 +1,6 @@
-h3
+h3.mt-5
   | Create a New Event:
-p
+p.lead
   = form_for(@event) do |f|
     .field
       = f.label :name, "Event Name:"
@@ -27,10 +27,11 @@ p
       = f.label :description, "Description:"
       br
       = f.text_field :description, autocomplete: "description"
+    br
     .field
-      = f.label :creator, "Creator:"
-      br
-      = f.label :creator, "#{User.find(current_user.id).full_name}"
+      = f.label :creator, "Creator(You): "
+      |   
+      = f.label :creator, " #{User.find(current_user.id).full_name}"
       = f.hidden_field :creator, :value => current_user.id
     .action_container
       br

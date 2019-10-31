@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   root to: 'static_pages#index'
-  devise_for :users
+  
+  devise_for :users, controllers: {registrations: "users/registrations"}
+
+  # devise_scope :user do
+  #   get 'login', to: 'devise/sessions#new'
+  #   get 'signup', to: 'devise/registrations#new'
+  # end
 
   namespace :admins do
     get 'show', to: 'show', as: 'profile'
