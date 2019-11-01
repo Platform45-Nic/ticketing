@@ -1,7 +1,10 @@
-h1 Account for: 
-= @user.full_name
-br
-p
+h3.mt-5 
+  | Account for: 
+  = @user.full_name
+h5.mt-1
+  | Current Account Balance: 
+  = @user.account.amount.to_s
+p.lead.mt-4
   | List of All Transactions: 
   - if @account_transactions.present?
     - @account_transactions.each do |account_transaction|
@@ -17,10 +20,40 @@ p
         | Reason: 
         = account_transaction.note
         br
-        |   
-        / = link_to "View Transaction", edit_event_path(account_transaction.id)
-        / br
   - else
     br
-    | There are currently no events to show
+    | There are currently no transactions for this Account!
+p.lead.mt-4
+  | Event's purchased by this Account: 
+  - if @account_transactions.present?
+    - @account_transactions.each do |account_transaction|
+      li
+        | Transaction Amount for: 
+        = account_transaction.amount.to_s
+        br
+      li
+        | Account No.: 
+        = account_transaction.account_id
+        br
+      li
+        | Reason: 
+        = account_transaction.note
+        br
+  - else
+    br
+    | There are currently no transactions for this Account!
 br
+- if current_user.type == "Admin"
+  | You can: 
+  = link_to "Create an Event!", new_event_path
+  |  |   
+  = link_to "View Event's", events_path
+  br
+  | or : 
+  = link_to "Create an Category!", new_catagory_path
+  |  |   
+  = link_to "View Categories", catagories_path
+- elsif current_user.type == "Normal"
+  | You can: 
+  = link_to "View Event's", normals_events_path
+br/

@@ -10,9 +10,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super do |resource|
+      if resource.type == "Normal"
+        AccountCreator.new(resource).create_user_account
+      end
+    end
+  end
 
   # GET /resource/edit
   # def edit

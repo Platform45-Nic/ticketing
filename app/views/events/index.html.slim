@@ -21,6 +21,10 @@ p.lead
     br
     | There are currently no events to show
 br
-| You can: 
-= link_to "Create an Event!", new_event_path
+- if current_user.type == "Admin"
+  | You can: 
+  = link_to "Create an Event!", new_event_path
+- elsif current_user.type == "Normal"
+  | You can: 
+  = link_to "View your Account!", account_path(current_user.id)
 br

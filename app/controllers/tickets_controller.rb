@@ -29,25 +29,13 @@ class TicketsController < ApplicationController
   end
 
   def update
+    @user = User.find(current_user.id)
     @tickets_to_purchase = ticket_params
-    # Check if there is enough for the transaction:
-    if Account.find_by(user_id: User.find(current_user.id).id).check_ticket_price_against_account?(ticket_price_total(@tickets_to_purchase, Ticket.where(event_id: @tickets_to_purchase[:event_id].to_i).first)) == true
-      # Check the ticket counter is not 0 before purchase:
-      if @tickets_to_purchase[:ticket_no_for_purchase].to_i > 0
-        @ticket_array = Ticket.all.where(event_id: @tickets_to_purchase[:event_id].to_i, sold_originally: false, purchaser_id: nil)
-        @ticket_array = @ticket_array.limit(@tickets_to_purchase[:ticket_no_for_purchase].to_i).pluck(:id, :event_id, :price)
-        # Start transaction on user account/transaction:
-        @ticket_array.each do |ticket_purchase|
-          ticket = Ticket.find(ticket_purchase(0))
-          ticket.update(sold_originally: true, purchaser_id: @tickets_to_purchase[:purchaser_id].to_i)
-          # Do account transaction here
-          account_transaction(ticket.price)
-        end
-        redirect_to normals_profile_path
-      else
-        flash.now[:error] = "Please choose more than 0 tickets."
-        render 'edit'
-      end
+    if @user.account.check_ticket_price_against_account?(ticket_price_total) && @tickets_to_purchase[:ticket_no_for_purchase].to_i > 0
+      TicketPurchaser.new(@tickets_to_purchase).purchase_ticket
+    elsif @tickets_to_purchase[:ticket_no_for_purchase].to_i > 0
+      flash.now[:error] = "Please choose more than 0 tickets."
+      render 'edit'
     else
       flash.now[:error] = "Ticket cost exceeds account amount, please top up account."
       render 'edit'
@@ -60,13 +48,9 @@ class TicketsController < ApplicationController
       params.permit(:ticket_no_for_purchase, :event_id, :purchaser_id)
     end
 
-    def ticket_price_total(ticket_params, ticket)
-      ticket_params[:ticket_no_for_purchase].to_i * ticket.price
-    end
-
-    def account_transaction(ticket_price)
-      Account.find_by(user_id: User.find(current_user.id).id).subtract_from_account!(ticket_price)
-      AccountTransaction.new(amount: ticket_price, account_id: Account.find_by(user_id: User.find(current_user.id).id), note: "ticket purchase").save
+    def ticket_price_total
+      ticket = ticket_params
+      ticket[:ticket_no_for_purchase].to_i * Ticket.where(event_id: ticket[:event_id]).price
     end
 
 end

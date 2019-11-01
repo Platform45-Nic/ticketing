@@ -1,6 +1,6 @@
-h1 Profile
+h1.mt-1 Profile
 
-p
+p.lead
   | Name: 
   = @user.first_name.capitalize
   br
@@ -10,10 +10,29 @@ p
   | Email: 
   = @user.email
   br
-  | User Type: 
-  = @user.type
+  | Current Account Balance: 
+  = @user.account.amount.to_s
   br
+p.lead.mt-4
+  | Ticket's purchased: 
+  - if @account_transactions.present?
+    - @account_transactions.each do |account_transaction|
+      li
+        | Event Name: 
+        = account_transaction.amount.to_s
+        br
+      li
+        | Ticket Price: 
+        = account_transaction.account_id
+        br
+      li
+        | Unique Ticket Number: 
+        = account_transaction.note
+        br
+  - else
+    br
+    | There are currently no ticket's purchased by this Account!
 br/
 | You can:
 br
-  = link_to "View Events ", normals_events_path
+  = link_to "View Event's!", normals_events_path
