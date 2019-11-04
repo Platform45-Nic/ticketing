@@ -5,7 +5,8 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket = Ticket.find(params[:id])
+    @tickets = Ticket.where(purchaser_id: current_user.id)
+    @event = Event.find(@tickets.first.event_id)
   end
 
   def new
@@ -33,8 +34,9 @@ class TicketsController < ApplicationController
     @tickets_to_purchase = ticket_params
     if @user.account.check_ticket_price_against_account?(ticket_price_total) && @tickets_to_purchase[:ticket_no_for_purchase].to_i > 0
       TicketPurchaser.new(@tickets_to_purchase).purchase_ticket
-    elsif @tickets_to_purchase[:ticket_no_for_purchase].to_i > 0
-      flash.now[:error] = "Please choose more than 0 tickets."
+      redirect_to show_tickets_path(params[:id])
+    elsif @tickets_to_purchase[:ticket_no_for_purchase].to_i == 0
+      flash.now[:error] = "Please choose at least 1 ticket before Purchase."
       render 'edit'
     else
       flash.now[:error] = "Ticket cost exceeds account amount, please top up account."
@@ -50,7 +52,7 @@ class TicketsController < ApplicationController
 
     def ticket_price_total
       ticket = ticket_params
-      ticket[:ticket_no_for_purchase].to_i * Ticket.where(event_id: ticket[:event_id]).price
+      ticket[:ticket_no_for_purchase].to_i * Ticket.where(event_id: ticket[:event_id].to_i).first.price
     end
 
 end

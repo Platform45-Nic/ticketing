@@ -56,6 +56,10 @@
       = @event.description.capitalize
       br
     li
+      | Price: 
+      = @event.tickets.first.price.to_s
+      br
+    li
       | Creator: 
       = User.find(@event.creator.to_i).full_name
       br
