@@ -11,6 +11,9 @@ class Event < ApplicationRecord
   validates_presence_of :creator
   validates_presence_of :catagory_id
 
+  scope :future, -> { where("date >= ?", Date.current) }
+  scope :past, -> { where("date < ?", Date.current) }
+
   def availble_ticket_count
     @tickets = "#{Ticket.all.where(event_id: id, purchaser_id: nil).count}"
     if @tickets.to_i > 0
@@ -18,6 +21,10 @@ class Event < ApplicationRecord
     else
       "Sold Out!"
     end
+  end
+
+  def tickets_for_marketplace
+    self.tickets.marketplace
   end
 
   private

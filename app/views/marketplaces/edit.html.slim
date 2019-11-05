@@ -1,0 +1,27 @@
+h3
+  | Purchase Tickets for this Event: 
+  br
+p
+  = form_tag show_path, method: :patch do |f|
+    | Event Name: 
+    = @event.name.capitalize
+    br/
+    br/
+    | Discription of this event: 
+    br/
+    = @event.description
+    br/
+    | Price: 
+    = @event.tickets.first.price.to_s
+    br/
+    br/
+    | How many tickets would you like? : 
+    / br/
+    br/
+    input id="ticket_no_for_purchase" max="#{@available_tickets}" min="0" name="ticket_no_for_purchase" step="1" type="number" /
+    br/
+    input id="event_id" name="event_id" type="hidden" value="#{@event.id}" /
+    br/
+    input id="purchaser_id" name="purchaser_id" type="hidden" value="#{@user.id}" /
+    / br/
+    input type="submit" value="Purchase"

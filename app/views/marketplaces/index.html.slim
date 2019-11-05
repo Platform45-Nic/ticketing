@@ -1,0 +1,18 @@
+h3.mt-5
+  | Welcome to the Marketplace: 
+p.lead
+  | Ticket's Available for purchase:
+  - if @events.present? && current_user.type == "Normal"
+    - @events.each do |event|
+      - if event.tickets_for_marketplace.present?
+        .mt-2
+          | Event Name: 
+          = event.name.capitalize
+          br
+          | Tickets Availble:
+          br/
+          - event.tickets_for_marketplace.each do |ticket|
+            li
+              = ticket.number
+              br/
+      

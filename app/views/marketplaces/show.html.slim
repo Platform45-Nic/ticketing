@@ -1,0 +1,44 @@
+h3.mt-5
+  | Your current tickets:
+- if @event.present? && @tickets.present? && current_user.type == "Admin"
+  - @tickets.each do |ticket|
+    p.lead
+      | Event Ticket: 
+      li
+        | Event Name: 
+        = @event.name.capitalize
+        br
+      li
+        | Date: 
+        = @event.date.to_s
+        br
+      li
+        | Category: 
+        = @event.catagory.name
+        br
+      li
+        | Ticket No. 
+        = ticket.number
+        br
+    br
+- elsif @event.present? && @tickets.present? && current_user.type == "Normal"
+  - @tickets.each do |ticket|
+    p.lead
+      | Event Ticket: 
+      li
+        | Event Name: 
+        = @event.name.capitalize
+        br
+      li
+        | Date: 
+        = @event.date.to_s
+        br
+      li
+        | Category: 
+        = @event.catagory.name
+        br
+      li
+        | Ticket No. 
+        = ticket.number
+        br
+    br
