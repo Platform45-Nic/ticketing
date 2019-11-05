@@ -14,4 +14,8 @@ li.nav-item
     = link_to "Account", account_path(current_user.id), class: 'nav-link'
 li.nav-item
   a.nav-link
+    = link_to "Your Tickets", user_tickets_path, class: 'nav-link'
+li.nav-item
+  a.nav-link
     = link_to "Logout", destroy_user_session_path, method: :delete, class: 'nav-link'
+    

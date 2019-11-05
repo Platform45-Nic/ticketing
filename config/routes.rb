@@ -20,7 +20,11 @@ Rails.application.routes.draw do
     get 'show', to: 'normals#show', as: 'normals_profile'
     resources :accounts, only: [:index, :show]
     resources :events, only: [:show, :edit, :update]
-    resources :marketplace, controller: 'marketplaces', only: [:index]
+    resources :marketplace, controller: 'marketplaces', only: [:index, :show]
+    scope '/options' do
+      get 'show/tickets', to: 'tickets#index', as: 'user_tickets'
+      put 'ticket', to: 'marketplaces#update', as: 'ticket_to_marketplace'
+    end
     scope '/event' do
       get 'index', to: 'events#index', as: 'normals_events'
       get 'show/:id', to: 'events#show', as: 'normals_event'

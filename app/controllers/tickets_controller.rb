@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
 
   def index
-    @tickets = Ticket.all
+    @events = Event.all
   end
 
   def show

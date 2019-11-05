@@ -1,13 +1,11 @@
 class MarketplacesController < ApplicationController
 
   def index
-    @events = Event.all
+    @events = Event.all.future
   end
 
   def show
-    @ticket = Ticket.find(param[:id])
-    # @catagory = Catagory.find(params[:id])
-    # @catagory_events = Event.where(catagory_id: @catagory.id.to_i)
+    @event = Event.find(params[:id])
   end
 
   def new
@@ -21,6 +19,22 @@ class MarketplacesController < ApplicationController
       redirect_to @catagory, notice: "You have Created a new Catagory"
     else
       render 'new'
+    end
+  end
+
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @ticket = Ticket.find(params[:id])
+    @ticket.update(on_resell: true)
+    if @ticket.save
+      flash[:success] = "Ticket now for sale on the Marketplace."
+      redirect_to user_tickets_path
+    else
+      flash.now[:error] = "There was a problem moving your ticket to the Marketplace."
+      redirect_to user_tickets_path
     end
   end
 
