@@ -2,7 +2,7 @@ h1.mt-5 Category Page:
 p.lead
   | Category Name: 
   h3
-    = @catagory.name
+    = @catagory.name.capitalize
   br
   p
   | List of Events for this Category:
@@ -27,9 +27,16 @@ p.lead
       br
   - else
     br
-    | There are currently no categories to show
+    | There are currently no Events to show for this Category!
+| You can: 
 br
-= link_to "Create Category", new_catagory_path
-br
+= link_to "Create Category!", new_catagory_path
+|  |  
 = link_to "Category Index (All)", catagories_path
+br
+| Or: 
+br
+= link_to "Create a Event!", new_event_path
+|  |  
+= link_to "Event Index (All)", events_path
 br

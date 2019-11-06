@@ -33,6 +33,6 @@ h2
     = f.password_field :password_confirmation, autocomplete: "new-password"
   .actions
   br
-    = f.submit "Sign up"
+    = f.submit("Sign up", class: "btn btn-primary")
   br
 = render "users/shared/links"

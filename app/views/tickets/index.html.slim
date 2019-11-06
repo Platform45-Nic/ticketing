@@ -17,4 +17,6 @@ p.lead
               |  |  
               = link_to "Sell Ticket!", ticket_to_marketplace_path(id: ticket.id), data: { confirm: 'Are you sure?' }, method: :put
               br/
+      - else
+        | You have not purchased any tickets | 
       

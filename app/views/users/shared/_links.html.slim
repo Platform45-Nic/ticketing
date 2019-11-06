@@ -1,6 +1,6 @@
 - if controller_name != 'sessions'
-  | Or 
-  = link_to "Log in", new_session_path(resource_name)
+  | Or if your registered: 
+  = link_to "Log in!", new_session_path(resource_name)
   br
 - if devise_mapping.registerable? && controller_name != 'registrations'
   | Or 

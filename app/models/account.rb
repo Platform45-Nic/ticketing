@@ -20,7 +20,7 @@ class Account < ApplicationRecord
   end
 
   def add_to_account!(amount_total)
-    self.update_attributes(amount: (amount - amount_total))
+    self.update_attributes(amount: (amount + amount_total))
   end
 
 end

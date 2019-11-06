@@ -33,8 +33,6 @@
       |  | 
       = link_to "Delete", event_path(@event.id), method: :delete
       br
-      / | or 
-      / = link_to "Continue to Event's Index!", events_path
   br
 - elsif current_user.type == "Normal" && @event.present?
   p
@@ -67,6 +65,6 @@
       | User Actions: 
       br
       |  
-      = button_to "Purchase", edit_show_path(@event.id), method: :get
+      = button_to "Purchase", edit_show_path(@event.id), method: :get, class: "btn btn-primary"
       br
   br

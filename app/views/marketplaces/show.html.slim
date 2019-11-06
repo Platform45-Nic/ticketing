@@ -16,5 +16,5 @@ h5.mt-2
       | Tickets Availble: (
       = @event.tickets_for_marketplace.count
       | )
-      = button_to "Purchase Tickets", edit_show_path(@event.id), method: :get
+      = button_to "Purchase Tickets", edit_show_path(@event.id), method: :get, class: "btn btn-primary"
       br

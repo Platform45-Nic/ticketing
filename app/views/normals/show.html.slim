@@ -12,27 +12,8 @@ p.lead
   br
   | Current Account Balance: 
   = @user.account.amount.to_s
-  br
-p.lead.mt-4
-  | Ticket's purchased: 
-  - if @account_transactions.present?
-    - @account_transactions.each do |account_transaction|
-      li
-        | Event Name: 
-        = account_transaction.amount.to_s
-        br
-      li
-        | Ticket Price: 
-        = account_transaction.account_id
-        br
-      li
-        | Unique Ticket Number: 
-        = account_transaction.note
-        br
-  - else
-    br
-    | There are currently no ticket's purchased by this Account!
+  = button_to "Top Up Account!", top_up_account_path(id: @user.id), data: { confirm: 'Top up with 100 credit?' }, method: :put, class: "btn btn-primary"
 br/
 | You can:
 br
-  = link_to "View Event's!", normals_events_path
+  = link_to "View Event's to purchase tickets!", normals_events_path

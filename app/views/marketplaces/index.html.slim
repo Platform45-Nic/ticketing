@@ -11,6 +11,9 @@ p.lead.mt-3
           | Event: 
           = link_to "#{event.name.capitalize}", marketplace_path(event.id)
           br
+          | Date: 
+          = event.date
+          br
           | Tickets Availble: (
           = event.tickets_for_marketplace.count
           | )
