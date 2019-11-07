@@ -1,12 +1,15 @@
-.container
-  .row
-    .col-lg-12.text-center
-      h1.mt-5
-        | Welcome to The Generic Ticketing System 
-      p.lead
-        | Sign Up! or Log In to continue
-      ul.list-unstyled
-        li
-          | Admin - Create Categories and Events
-        li
-          | User - Buy tickets to Events Or use the Marketplace
+h1.mt-5
+  | Welcome to GTS 
+h4 - Generic Ticketing System -
+br
+p.lead
+  = link_to "Sign Up ", new_user_registration_path
+  | or 
+  = link_to "Login ", new_user_session_path
+  | to continue
+  br
+ul.list-unstyled
+  li
+    | Admin - Create Categories and Events
+  li
+    | User - Buy tickets to Events Or use the Marketplace

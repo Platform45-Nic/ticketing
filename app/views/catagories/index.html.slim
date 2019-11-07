@@ -1,17 +1,19 @@
-h1 Category Index
-
-p
-  | List of All Categories:
-  br
+h1.mt-5
+  | Category Index
+p.lead
+  h4 List of All Categories:
   - if @catagories.present?
     - @catagories.each do |catagory|
       br
-      | Category Name: 
+      | Category - 
       = link_to "#{catagory.name}", catagory_path(catagory.id)
-      br
   - else
     br
-    | There are currently no categories to show
+    | There are currently no categories to show. Please create a Category.
 br
-= link_to "Create Category", new_catagory_path
+| You can: 
+br
+= link_to "Create a Category! ", new_catagory_path
+| Or 
+= link_to "Create an Event!", new_event_path
 br

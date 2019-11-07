@@ -1,0 +1,20 @@
+h3.mt-5
+  | Welcome to the Marketplace: 
+h5.mt-2
+  | | Event Tickets being sold by user's | 
+- if @event.present? && current_user.type == "Normal"
+    p.lead.mt-4
+      | Event Name: 
+      = @event.name.capitalize
+      br
+      | Date: 
+      = @event.date.to_s
+      br
+      | Category: 
+      = @event.catagory.name
+      br
+      | Tickets Availble: (
+      = @event.tickets_for_marketplace.count
+      | )
+      = button_to "Purchase Tickets", edit_show_path(@event.id), method: :get, class: "btn btn-primary"
+      br

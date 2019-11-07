@@ -1,0 +1,21 @@
+h3.mt-5
+  | Welcome to the Marketplace: 
+h5.mt-2
+  | | Where user's resell their tickets | 
+p.lead.mt-3
+  | Ticket's Available for purchase:
+  - if @events.present? && current_user.type == "Normal"
+    - @events.each do |event|
+      - if event.tickets_for_marketplace.present?
+        .mt-2
+          | Event: 
+          = link_to "#{event.name.capitalize}", marketplace_path(event.id)
+          br
+          | Date: 
+          = event.date
+          br
+          | Tickets Availble: (
+          = event.tickets_for_marketplace.count
+          | )
+          br/
+      

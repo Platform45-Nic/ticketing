@@ -1,0 +1,22 @@
+h3.mt-5
+  | Your current list of Tickets: 
+p.lead
+  - if @events.future.present? && current_user.type == "Normal"
+    - @events.future.each do |event|
+      - if event.tickets.where(purchaser_id: current_user.id).present?
+        .mt-2
+          | Event Name: |  
+          = event.name.capitalize
+          br/
+          br/
+          | Tickets Bought for Event:
+          br/
+          - event.tickets.where(purchaser_id: current_user.id).owned.each do |ticket|
+            li
+              = ticket.number
+              |  |  
+              = link_to "Sell Ticket!", ticket_to_marketplace_path(id: ticket.id), data: { confirm: 'Are you sure?' }, method: :put
+              br/
+      - else
+        | You have not purchased any tickets | 
+      

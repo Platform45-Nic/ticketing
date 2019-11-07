@@ -1,7 +1,10 @@
-p
-  | List of All Events: 
+h3.mt-5
+  | Event Index:
+br/
+p.lead
+  | List of All Future Events: 
   - if @events.present? && current_user.type == "Admin"
-    - @events.each do |event|
+    - @events.future.each do |event|
       li
         = event.name.capitalize
         |   
@@ -10,13 +13,41 @@ p
         = link_to "View", event_path(event.id)
         br
   - elsif @events.present? && current_user.type == "Normal"
-    - @events.each do |event|
+    - @events.future.each do |event|
       li
         = link_to "#{event.name.capitalize}", normals_event_path(event.id)
         |  | Tickets Availble: 
         = event.availble_ticket_count
-        br
+        |  | 
+        = link_to "Purchase Tickets!", edit_show_path(event.id), method: :get
   - else
     br
     | There are currently no events to show
+  br/
+p.lead
+  | List of All Past Events: 
+  - if @events.present? && current_user.type == "Admin"
+    - @events.past.each do |event|
+      li
+        = event.name.capitalize
+        |   
+        = link_to "Edit", edit_event_path(event.id)
+        |  | 
+        = link_to "View", event_path(event.id)
+        br
+  - elsif @events.present? && current_user.type == "Normal"
+    - @events.past.each do |event|
+      li
+        = link_to "#{event.name.capitalize}", normals_event_path(event.id)
+        |  | Tickets unavailble for past events
+  - else
+    br
+    | There are currently no events to show
+br
+- if current_user.type == "Admin"
+  | You can: 
+  = link_to "Create an Event!", new_event_path
+- elsif current_user.type == "Normal"
+  | You can: 
+  = link_to "View your Account!", account_path(current_user.id)
 br

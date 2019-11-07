@@ -1,6 +1,6 @@
-h1 Profile
+h1.mt-1 Profile
 
-p
+p.lead
   | Name: 
   = @user.first_name.capitalize
   br
@@ -10,10 +10,10 @@ p
   | Email: 
   = @user.email
   br
-  | Type: 
-  = @user.type
-  br
-  | Current User ID: 
-  = current_user.id
-  br
+  | Current Account Balance: 
+  = @user.account.amount.to_s
+  = button_to "Top Up Account!", top_up_account_path(id: @user.id), data: { confirm: 'Top up with 100 credit?' }, method: :put, class: "btn btn-primary"
 br/
+| You can:
+br
+  = link_to "View Event's to purchase tickets!", normals_events_path

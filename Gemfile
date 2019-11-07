@@ -20,6 +20,7 @@ gem 'devise'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'bootstrap_form'
+gem 'popper'
 
 group :development, :test do
   gem 'pry'
