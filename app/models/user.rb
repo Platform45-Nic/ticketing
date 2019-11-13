@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :price
 
-  has_many :admins, class_name: 'Admin'
-  has_many :normals, class_name: 'Normal'
   has_one :account
 
   validates_presence_of :email

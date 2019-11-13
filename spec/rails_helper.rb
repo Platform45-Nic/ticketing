@@ -2,6 +2,7 @@
 require 'spec_helper'
 require 'factory_bot_rails'
 require 'capybara/rspec'
+require 'selenium/webdriver'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -42,7 +43,10 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.include Devise::Test::IntegrationHelpers, type: :feature
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
+  Capybara.raise_server_errors = false
+  Capybara.javascript_driver = :selenium_chrome_headless
+  Capybara.server = :puma
   
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
