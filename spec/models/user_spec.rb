@@ -7,9 +7,20 @@ RSpec.describe User, type: :model do
       expect(association).to eq :has_one
     end
   end
-  context 'Scopes' do
-    it 'admin scope gets users by type' do
-      user = create(:user)
-    end
+
+  describe 'associations' do
+    it { should have_one(:account) }
   end
+
+  describe 'validations' do
+    it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:type) }
+  end
+  # context 'Scopes' do
+  #   it 'admin scope gets users by type' do
+  #     user = create(:user)
+  #   end
+  # end
 end
